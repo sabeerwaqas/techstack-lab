@@ -16,6 +16,7 @@ Whether it's frontend, backend, DevOps, or full-stack concepts — this lab help
 | Async/Await                | Cleaner async code using async/await syntax        | [📖 View Notes](./notes/javascript/async-await/README.md)  
 | Context vs Zustand         | Difference between context and zustand        | [📖 View Notes](./notes//React/context-vs-state-management-library/README.md)           |
 | Java Fundamentals          | Explore java fundamentals and syntax        | [📁 Visit Repo](https://github.com/sabeerwaqas/java-backend)           |
+| Java Practice Project      | Make a project to display books based on user input        | [📁 Visit Repo](https://github.com/sabeerwaqas/books-displaying-project)           |
 | More coming soon...        | More learning topics will be added gradually.      | —                                                                    |
 
 
