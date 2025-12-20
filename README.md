@@ -15,6 +15,7 @@ Whether it's frontend, backend, DevOps, or full-stack concepts — this lab help
 | Promises                   | Understanding JavaScript Promises                  | [📖 View Notes](./notes/javascript/promises/README.md)               |
 | Async/Await                | Cleaner async code using async/await syntax        | [📖 View Notes](./notes/javascript/async-await/README.md)  
 | Context vs Zustand         | Difference between context and zustand        | [📖 View Notes](./notes//React/context-vs-state-management-library/README.md)           |
+| Java Fundamentals          | Explore java fundamentals and syntax        | [📁 Visit Repo](https://github.com/sabeerwaqas/java-backend)           |
 | More coming soon...        | More learning topics will be added gradually.      | —                                                                    |
 
 
