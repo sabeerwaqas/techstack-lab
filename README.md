@@ -17,6 +17,7 @@ Whether it's frontend, backend, DevOps, or full-stack concepts — this lab help
 | Context vs Zustand         | Difference between context and zustand        | [📖 View Notes](./notes//React/context-vs-state-management-library/README.md)           |
 | Java Fundamentals          | Explore java fundamentals and syntax        | [📁 Visit Repo](https://github.com/sabeerwaqas/java-backend)           |
 | Java Practice Project      | Make a project to display books based on user input        | [📁 Visit Repo](https://github.com/sabeerwaqas/books-displaying-project)           |
+| Connect Supabase To Spring Boot App      | Learn to connect supabase db to spring boot app        | [📁 Visit Repo](https://github.com/sabeerwaqas/connect-supabase-to-spring-boot-app)           |
 | More coming soon...        | More learning topics will be added gradually.      | —                                                                    |
 
 
