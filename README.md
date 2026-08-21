@@ -19,6 +19,7 @@ Whether it's frontend, backend, DevOps, or full-stack concepts — this lab help
 | Java Practice Project      | Make a project to display books based on user input        | [📁 Visit Repo](https://github.com/sabeerwaqas/books-displaying-project)           |
 | Connect Supabase To Spring Boot App      | Learn to connect supabase db to spring boot app        | [📁 Visit Repo](https://github.com/sabeerwaqas/connect-supabase-to-spring-boot-app)           |
 | Java Architecture Deep Dive      | Learn about Java architecture        | [📖 View Notes](https://github.com/sabeerwaqas/techstack-lab/blob/main/notes/java-architecture.md)           |
+| JWT      | Learn JWT Essentials        | [📖 View Notes](https://github.com/sabeerwaqas/techstack-lab/blob/main/notes/JWT.md)           |
 | More coming soon...        | More learning topics will be added gradually.      | —                                                                    |
 
 
