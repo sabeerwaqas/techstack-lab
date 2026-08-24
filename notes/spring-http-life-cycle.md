@@ -8,35 +8,35 @@
 
 1. [Overview](#overview)
 2. [The Big Picture](#the-big-picture)
-3. [HTTP Request](#1-http-request)
-4. [Tomcat / Servlet Container](#2-tomcat--servlet-container)
-5. [Servlet Filters](#3-servlet-filters)
-6. [Spring Security Filter Chain](#4-spring-security-filter-chain)
-7. [DispatcherServlet](#5-dispatcherservlet)
-8. [HandlerMapping](#6-handlermapping)
-9. [HandlerAdapter](#7-handleradapter)
-10. [Controller](#8-controller)
-11. [Service Layer](#9-service-layer)
-12. [Repository Layer](#10-repository-layer)
-13. [JPA and Hibernate](#11-jpa-and-hibernate)
-14. [Database](#12-database)
-15. [Response Flow](#13-response-flow)
-16. [HttpMessageConverter](#14-httpmessageconverter)
-17. [Filters vs Interceptors](#15-filters-vs-interceptors)
-18. [Transactions](#16-transactions)
-19. [Exception Handling](#17-exception-handling)
-20. [Validation](#18-validation)
-21. [Request Body Deserialization](#19-request-body-deserialization)
-22. [Response Serialization](#20-response-serialization)
-23. [Complete Request + Response Flow](#21-complete-request--response-flow)
-24. [What Happens When Things Go Wrong](#22-what-happens-when-things-go-wrong)
-25. [Backend Developer Checklist](#23-backend-developer-checklist)
-26. [Interview Explanation](#24-interview-explanation)
-27. [Final Mental Model](#25-final-mental-model)
+3. [HTTP Request](#http-request)
+4. [Tomcat / Servlet Container](#tomcat--servlet-container)
+5. [Servlet Filters](#servlet-filters)
+6. [Spring Security Filter Chain](#spring-security-filter-chain)
+7. [DispatcherServlet](#dispatcherservlet)
+8. [HandlerMapping](#handlermapping)
+9. [HandlerAdapter](#handleradapter)
+10. [Controller](#controller)
+11. [Service Layer](#service-layer)
+12. [Repository Layer](#repository-layer)
+13. [JPA and Hibernate](#jpa-and-hibernate)
+14. [Database](#database)
+15. [HttpMessageConverter](#httpmessageconverter)
+16. [Filters vs Interceptors](#filters-vs-interceptors)
+17. [Transactions](#transactions)
+18. [Exception Handling](#exception-handling)
+19. [Validation](#validation)
+20. [Request Body Deserialization](#request-body-deserialization)
+21. [Response Serialization](#response-serialization)
+22. [Complete Request + Response Flow](#complete-request--response-flow)
+23. [What Happens When Security Rejects a Request](#what-happens-when-security-rejects-a-request)
+24. [Backend Developer Knowledge Checklist](#backend-developer-knowledge-checklist)
+25. [Interview Explanation](#interview-explanation)
+26. [Final Mental Model](#final-mental-model)
+27. [Recommended Learning Order](#recommended-learning-order)
 
 ---
 
-# Overview
+## Overview
 
 When a client sends an HTTP request to a Spring Boot application, the request passes through several components before a response is returned.
 
@@ -98,7 +98,7 @@ Therefore, the diagram should be treated as a mental model, not as a rigid list 
 
 ---
 
-The Big Picture
+## The Big Picture
 
 Consider this request:
 
@@ -175,7 +175,7 @@ Client
 
 ---
 
-1. HTTP Request
+## HTTP Request
 
 The lifecycle begins when a client sends an HTTP request.
 
@@ -250,7 +250,7 @@ JSON object
 
 ---
 
-2. Tomcat / Servlet Container
+## Tomcat / Servlet Container
 
 Spring Boot applications commonly use an embedded web server such as:
 
@@ -278,7 +278,7 @@ it means the embedded Tomcat server is listening for incoming requests.
 
 ---
 
-What Does Tomcat Do?
+### What Does Tomcat Do?
 
 Tomcat handles low-level HTTP and Servlet responsibilities.
 
@@ -309,7 +309,7 @@ DispatcherServlet
 
 ---
 
-Servlet Container vs Spring
+### Servlet Container vs Spring
 
 This distinction is important.
 
@@ -331,7 +331,7 @@ Tomcat
 
 ---
 
-3. Servlet Filters
+## Servlet Filters
 
 Before the request reaches "DispatcherServlet", it can pass through Servlet filters.
 
@@ -383,7 +383,7 @@ AFTER request
 
 ---
 
-What Are Filters Used For?
+### What Are Filters Used For?
 
 Common use cases include:
 
@@ -409,7 +409,7 @@ DispatcherServlet
 
 ---
 
-4. Spring Security Filter Chain
+## Spring Security Filter Chain
 
 If Spring Security is installed and configured, the request normally passes through Spring Security's filter chain.
 
@@ -431,7 +431,7 @@ Think of the security filter chain as a security checkpoint.
 
 ---
 
-What Happens Inside the Security Filter Chain?
+### What Happens Inside the Security Filter Chain?
 
 The exact filters depend on your Spring Security configuration.
 
@@ -465,11 +465,11 @@ The actual chain depends on:
 
 ---
 
-Authentication vs Authorization
+### Authentication vs Authorization
 
 These two concepts must be clearly understood.
 
-Authentication
+#### Authentication
 
 Authentication asks:
 
@@ -489,7 +489,7 @@ Authentication establishes an identity.
 
 ---
 
-Authorization
+#### Authorization
 
 Authorization asks:
 
@@ -525,7 +525,7 @@ Important distinction:
 
 ---
 
-JWT Authentication Flow
+### JWT Authentication Flow
 
 Suppose the client sends:
 
@@ -561,7 +561,7 @@ The "SecurityContext" represents the security identity associated with the curre
 
 ---
 
-What If Authentication Fails?
+### What If Authentication Fails?
 
 If the request requires authentication and authentication fails:
 
@@ -579,7 +579,7 @@ The request may never reach the controller.
 
 ---
 
-What If Authorization Fails?
+### What If Authorization Fails?
 
 The user might be authenticated but not permitted to perform the operation.
 
@@ -601,7 +601,7 @@ Again, the controller may never execute.
 
 ---
 
-5. DispatcherServlet
+## DispatcherServlet
 
 If security allows the request to continue, Spring MVC takes over.
 
@@ -631,7 +631,7 @@ Create response
 
 ---
 
-Why Does DispatcherServlet Exist?
+### Why Does DispatcherServlet Exist?
 
 Instead of every controller directly dealing with the web server, Spring MVC has a central entry point.
 
@@ -652,7 +652,7 @@ This gives Spring a central place to coordinate:
 
 ---
 
-6. HandlerMapping
+## HandlerMapping
 
 Now Spring needs to answer:
 
@@ -690,7 +690,7 @@ CustomerController.getCustomer()
 
 ---
 
-How Does HandlerMapping Know About Controllers?
+### How Does HandlerMapping Know About Controllers?
 
 When the Spring application starts, Spring processes controller classes and their mappings.
 
@@ -716,7 +716,7 @@ When a request arrives, "HandlerMapping" looks for a matching handler.
 
 ---
 
-What Does HandlerMapping Consider?
+### What Does HandlerMapping Consider?
 
 Depending on the mapping mechanism and configuration, Spring can consider:
 
@@ -740,7 +740,7 @@ Spring can use these conditions when determining the appropriate handler.
 
 ---
 
-Example
+### Example
 
 Suppose you have:
 
@@ -775,7 +775,7 @@ Spring can distinguish them.
 
 ---
 
-Important
+### Important
 
 "HandlerMapping" does not execute your controller.
 
@@ -793,7 +793,7 @@ HandlerAdapter
 
 ---
 
-7. HandlerAdapter
+## HandlerAdapter
 
 Once Spring has found the appropriate handler, it needs a mechanism to invoke it.
 
@@ -815,7 +815,7 @@ Invoke handler
 
 ---
 
-Why Do We Need HandlerAdapter?
+### Why Do We Need HandlerAdapter?
 
 Spring MVC supports different types of handlers.
 
@@ -832,7 +832,7 @@ It is mainly an internal Spring MVC mechanism.
 
 ---
 
-HandlerAdapter and Method Arguments
+### HandlerAdapter and Method Arguments
 
 Consider:
 
@@ -864,9 +864,9 @@ Java method parameters
 
 ---
 
-Common Controller Argument Sources
+### Common Controller Argument Sources
 
-Path Variable
+#### Path Variable
 
 Request:
 
@@ -885,7 +885,7 @@ id = 10
 
 ---
 
-Query Parameter
+#### Query Parameter
 
 Request:
 
@@ -904,7 +904,7 @@ status = ACTIVE
 
 ---
 
-Request Body
+#### Request Body
 
 Request:
 
@@ -926,7 +926,7 @@ CreateCustomerRequest
 
 ---
 
-Request Header
+#### Request Header
 
 Request:
 
@@ -941,7 +941,7 @@ public CustomerDTO get(
 
 ---
 
-8. Controller
+## Controller
 
 Now your controller method executes.
 
@@ -975,7 +975,7 @@ Return response
 
 ---
 
-What Should Not Usually Go in a Controller?
+### What Should Not Usually Go in a Controller?
 
 Avoid putting large amounts of business logic inside controllers.
 
@@ -1004,7 +1004,7 @@ Repository
 
 ---
 
-9. Service Layer
+## Service Layer
 
 The service layer normally contains business logic.
 
@@ -1040,7 +1040,7 @@ The service may handle:
 
 ---
 
-Controller vs Service
+### Controller vs Service
 
 A useful mental model:
 
@@ -1062,7 +1062,7 @@ Business logic
 
 ---
 
-10. Repository Layer
+## Repository Layer
 
 The service may call a repository:
 
@@ -1087,7 +1087,7 @@ count
 
 ---
 
-11. JPA and Hibernate
+## JPA and Hibernate
 
 When using:
 
@@ -1117,9 +1117,9 @@ Database
 
 ---
 
-JPA vs Hibernate
+### JPA vs Hibernate
 
-JPA
+#### JPA
 
 JPA is a Java persistence specification/API.
 
@@ -1131,7 +1131,7 @@ It defines concepts such as:
 @ManyToOne
 EntityManager
 
-Hibernate
+#### Hibernate
 
 Hibernate is a popular implementation of JPA.
 
@@ -1149,7 +1149,7 @@ A useful statement to remember:
 
 ---
 
-12. Hibernate and SQL
+### Hibernate and SQL
 
 Suppose your code says:
 
@@ -1175,7 +1175,7 @@ The exact SQL depends on:
 
 ---
 
-Entity Mapping
+### Entity Mapping
 
 Suppose:
 
@@ -1205,7 +1205,7 @@ customer database table
 
 ---
 
-13. Database
+## Database
 
 The database executes the SQL.
 
@@ -1225,100 +1225,7 @@ The result travels back through the persistence layer.
 
 ---
 
-14. Database Result Travels Back
-
-Conceptually:
-
-Database
-   ↓
-JDBC
-   ↓
-Hibernate
-   ↓
-JPA
-   ↓
-Spring Data Repository
-   ↓
-Service
-
-Hibernate maps database data into Java objects.
-
-For example:
-
-Database row
-     ↓
-Hibernate
-     ↓
-Customer entity
-
----
-
-Entity → DTO
-
-The service may convert:
-
-Customer Entity
-      ↓
-Customer DTO
-
-Example:
-
-public CustomerDTO toDTO(Customer customer) {
-
-    return new CustomerDTO(
-        customer.getId(),
-        customer.getName(),
-        customer.getEmail()
-    );
-}
-
----
-
-Why Use DTOs?
-
-Suppose your entity contains:
-
-Customer
-├── id
-├── name
-├── email
-├── passwordHash
-├── internalStatus
-└── createdAt
-
-You may only want to expose:
-
-{
-  "id": 10,
-  "name": "John",
-  "email": "john@example.com"
-}
-
-A DTO gives you control over your API contract.
-
-Database Entity
-       ↓
-      DTO
-       ↓
-HTTP Response
-
----
-
-15. Controller Returns Result
-
-The controller returns:
-
-return customerService.getCustomer(id);
-
-For example:
-
-CustomerDTO
-
-Spring MVC now needs to convert this Java object into an HTTP response.
-
----
-
-16. HttpMessageConverter
+## HttpMessageConverter
 
 Suppose the controller returns:
 
@@ -1336,7 +1243,7 @@ Spring Boot commonly uses Jackson for JSON serialization and deserialization.
 
 ---
 
-Java Object → JSON
+### Java Object → JSON
 
 Example:
 
@@ -1366,7 +1273,7 @@ JSON
 
 ---
 
-@RestController
+### @RestController
 
 When using:
 
@@ -1387,7 +1294,7 @@ The returned object can be serialized into JSON.
 
 ---
 
-ResponseEntity
+### ResponseEntity
 
 You can also explicitly control the HTTP response:
 
@@ -1415,7 +1322,7 @@ return ResponseEntity
 
 ---
 
-17. Final HTTP Response
+### Final HTTP Response
 
 The response might look like:
 
@@ -1432,7 +1339,7 @@ The response travels through the servlet container and eventually reaches the cl
 
 ---
 
-18. Filters vs Interceptors
+## Filters vs Interceptors
 
 Spring MVC also provides interceptors.
 
@@ -1480,7 +1387,7 @@ Security should generally be handled by Spring Security rather than recreating a
 
 ---
 
-Filter vs Interceptor
+### Filter vs Interceptor
 
 Feature| Filter| Interceptor
 Layer| Servlet| Spring MVC
@@ -1504,7 +1411,7 @@ Controller
 
 ---
 
-19. Transactions
+## Transactions
 
 Suppose your service has:
 
@@ -1545,7 +1452,7 @@ This is why "@Transactional" is commonly associated with the service/business op
 
 ---
 
-20. AOP and Proxies
+### AOP and Proxies
 
 Spring uses proxies and AOP-style infrastructure for many cross-cutting concerns.
 
@@ -1580,7 +1487,7 @@ The important concept is:
 
 ---
 
-21. Exception Handling
+## Exception Handling
 
 What happens if something goes wrong?
 
@@ -1621,7 +1528,7 @@ Content-Type: application/json
 
 ---
 
-Exception Flow
+### Exception Flow
 
 Conceptually:
 
@@ -1641,7 +1548,7 @@ Error Response
 
 ---
 
-22. Validation
+## Validation
 
 Request validation commonly happens near the controller boundary.
 
@@ -1685,7 +1592,7 @@ Validation errors can be handled globally through exception handling.
 
 ---
 
-23. Request Body Deserialization
+## Request Body Deserialization
 
 Suppose the client sends:
 
@@ -1710,7 +1617,7 @@ This happens before your controller method executes.
 
 ---
 
-24. Response Serialization
+## Response Serialization
 
 The opposite happens for the response.
 
@@ -1734,7 +1641,7 @@ Java → JSON
 
 ---
 
-25. Content-Type vs Accept
+### Content-Type vs Accept
 
 HTTP clients communicate representation information using headers.
 
@@ -1764,11 +1671,11 @@ Accept
 
 ---
 
-26. Path Variables vs Query Parameters
+### Path Variables vs Query Parameters
 
 These are commonly confused.
 
-Path Variable
+#### Path Variable
 
 Request:
 
@@ -1787,7 +1694,7 @@ id = 10
 
 ---
 
-Query Parameter
+#### Query Parameter
 
 Request:
 
@@ -1806,7 +1713,7 @@ status = ACTIVE
 
 ---
 
-27. POST Request Lifecycle
+### POST Request Lifecycle
 
 Consider:
 
@@ -1870,7 +1777,7 @@ Client
 
 ---
 
-28. Requests That Do Not Access the Database
+### Requests That Do Not Access the Database
 
 Not every request goes all the way to the database.
 
@@ -1912,7 +1819,7 @@ unless the endpoint actually needs them.
 
 ---
 
-29. What Happens When Security Rejects a Request?
+## What Happens When Security Rejects a Request
 
 Example:
 
@@ -1944,7 +1851,7 @@ Repository
 
 ---
 
-30. What Happens When Authorization Fails?
+### What Happens When Authorization Fails?
 
 Example:
 
@@ -1964,7 +1871,7 @@ The controller may not execute.
 
 ---
 
-31. What Happens When No Controller Mapping Exists?
+### What Happens When No Controller Mapping Exists?
 
 Suppose the client requests:
 
@@ -1986,7 +1893,7 @@ No matching handler
 
 ---
 
-32. Important Spring MVC Components
+### Important Spring MVC Components
 
 A backend developer should know these names at least conceptually:
 
@@ -2006,11 +1913,11 @@ The important thing is knowing why they exist and where they participate.
 
 ---
 
-33. REST API vs Traditional MVC
+### REST API vs Traditional MVC
 
 Spring MVC can be used for both REST APIs and traditional server-rendered applications.
 
-REST API
+#### REST API
 
 @RestController
 
@@ -2023,7 +1930,7 @@ Response:
 
 ---
 
-Traditional MVC
+#### Traditional MVC
 
 @Controller
 
@@ -2047,7 +1954,7 @@ JSON
 
 ---
 
-34. Complete Request + Response Flow
+### Complete Request + Response Flow
 
 ┌─────────────────────────────┐
 │           CLIENT            │
@@ -2154,11 +2061,11 @@ JSON
 
 ---
 
-35. The Five Major Zones
+### The Five Major Zones
 
 A useful way to understand the entire lifecycle is to divide it into five zones.
 
-Zone 1 — HTTP / Web Server
+#### Zone 1 — HTTP / Web Server
 
 Client
  ↓
@@ -2170,7 +2077,7 @@ Question:
 
 ---
 
-Zone 2 — Security
+#### Zone 2 — Security
 
 Filters
  ↓
@@ -2182,7 +2089,7 @@ Question:
 
 ---
 
-Zone 3 — Spring MVC
+#### Zone 3 — Spring MVC
 
 DispatcherServlet
  ↓
@@ -2198,7 +2105,7 @@ Question:
 
 ---
 
-Zone 4 — Application
+#### Zone 4 — Application
 
 Controller
  ↓
@@ -2212,7 +2119,7 @@ Question:
 
 ---
 
-Zone 5 — Persistence
+#### Zone 5 — Persistence
 
 Repository
  ↓
@@ -2230,7 +2137,7 @@ Question:
 
 ---
 
-36. What You Should NOT Memorize
+### What You Should NOT Memorize
 
 Do not try to memorize every internal Spring class.
 
@@ -2264,9 +2171,9 @@ Once these concepts are clear, the implementation details become much easier.
 
 ---
 
-37. Backend Developer Knowledge Checklist
+## Backend Developer Knowledge Checklist
 
-HTTP
+### HTTP
 
 - [ ] HTTP request and response
 - [ ] HTTP methods
@@ -2284,7 +2191,7 @@ HTTP
 
 ---
 
-Servlet / Web Layer
+### Servlet / Web Layer
 
 - [ ] What Tomcat does
 - [ ] What a Servlet is
@@ -2295,7 +2202,7 @@ Servlet / Web Layer
 
 ---
 
-Spring MVC
+### Spring MVC
 
 - [ ] DispatcherServlet
 - [ ] HandlerMapping
@@ -2315,7 +2222,7 @@ Spring MVC
 
 ---
 
-Spring Security
+### Spring Security
 
 - [ ] Authentication
 - [ ] Authorization
@@ -2332,7 +2239,7 @@ Spring Security
 
 ---
 
-Application Layer
+### Application Layer
 
 - [ ] Controller responsibility
 - [ ] Service responsibility
@@ -2345,7 +2252,7 @@ Application Layer
 
 ---
 
-Persistence
+### Persistence
 
 - [ ] JPA
 - [ ] Hibernate
@@ -2366,7 +2273,7 @@ Persistence
 
 ---
 
-Production-Level Knowledge
+### Production-Level Knowledge
 
 - [ ] Logging
 - [ ] Metrics
@@ -2386,7 +2293,7 @@ Production-Level Knowledge
 
 ---
 
-38. Interview Explanation
+## Interview Explanation
 
 If an interviewer asks:
 
@@ -2394,9 +2301,9 @@ If an interviewer asks:
 
 A strong answer is:
 
-«The request first reaches the embedded servlet container, such as Tomcat. It can pass through Servlet filters and, when Spring Security is configured, through the Spring Security filter chain, where authentication and authorization are performed.
+«The request first reaches the embedded servlet container, such as Tomcat. It can pass through Servlet filters and, when Spring Security is configured, through the Spring Security filter chain, where authentication and authorization checks occur.
 
-If the request is allowed to continue, it reaches Spring MVC's "DispatcherServlet". "DispatcherServlet" uses "HandlerMapping" to find the controller method that matches the HTTP method and request mapping.
+If the request is allowed to continue, it reaches Spring MVC's "DispatcherServlet". "DispatcherServlet" uses "HandlerMapping" to find the controller method that matches the HTTP method and request path.
 
 A "HandlerAdapter" then invokes the selected controller method, while Spring resolves things such as path variables, query parameters, headers, and request bodies.
 
@@ -2408,7 +2315,7 @@ Exceptions can be handled through Spring MVC's exception-handling infrastructure
 
 ---
 
-39. Final Mental Model
+## Final Mental Model
 
 If you remember only one thing, remember this:
 
@@ -2494,13 +2401,13 @@ Exception Handling
 
 ---
 
-40. One-Line Summary
+### One-Line Summary
 
-«Client sends HTTP → Tomcat receives it → Filters/Security process it → DispatcherServlet coordinates it → HandlerMapping finds the controller → HandlerAdapter invokes it → Controller calls Service → Service calls Repository → JPA/Hibernate communicates with Database → result returns → HttpMessageConverter converts Java to JSON → Tomcat sends the HTTP response back to the client.»
+«Client sends HTTP → Tomcat receives it → Filters/Security process it → DispatcherServlet coordinates it → HandlerMapping finds the controller → HandlerAdapter invokes it → Controller calls Service → Service calls Repository → Repository uses Hibernate → Hibernate queries Database → Result comes back through each layer → Jackson converts to JSON → Response sent to client.»
 
 ---
 
-Recommended Learning Order
+## Recommended Learning Order
 
 If you are learning Spring Boot backend development, understand these concepts in this order:
 
