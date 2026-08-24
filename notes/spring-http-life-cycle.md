@@ -42,7 +42,7 @@ When a client sends an HTTP request to a Spring Boot application, the request pa
 
 A simplified lifecycle is:
 
-```text
+
 Client
   ↓
 Tomcat / Jetty / Undertow
