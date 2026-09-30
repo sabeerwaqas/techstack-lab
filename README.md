@@ -22,6 +22,7 @@ Whether it's frontend, backend, DevOps, or full-stack concepts — this lab help
 | JWT      | Learn JWT Essentials        | [📖 View Notes](https://github.com/sabeerwaqas/techstack-lab/blob/main/notes/JWT.md)           |
 | Java Interface      | Learn Java Interface        | [📖 View Notes](https://github.com/sabeerwaqas/techstack-lab/blob/main/notes/java-interface.md)           |
 | Java Strings      | Learn Java Strings        | [📖 View Notes](https://github.com/sabeerwaqas/techstack-lab/blob/main/notes/java-strings.md)           |
+| Java Strings (Continue)      | Learn Java Strings        | [📖 View Notes](https://github.com/sabeerwaqas/techstack-lab/blob/main/notes/java-strings-2.md)           |
 | More coming soon...        | More learning topics will be added gradually.      | —                                                                    |
 
 
