@@ -23,6 +23,7 @@ Whether it's frontend, backend, DevOps, or full-stack concepts — this lab help
 | Java Interface      | Learn Java Interface        | [📖 View Notes](https://github.com/sabeerwaqas/techstack-lab/blob/main/notes/java-interface.md)           |
 | Java Strings      | Learn Java Strings        | [📖 View Notes](https://github.com/sabeerwaqas/techstack-lab/blob/main/notes/java-strings.md)           |
 | Java Strings (Continue)      | Learn Java Strings        | [📖 View Notes](https://github.com/sabeerwaqas/techstack-lab/blob/main/notes/java-strings-2.md)           |
+| More coming soon...        | Explore complete bean life cycle     | [📖 View Notes](https://github.com/sabeerwaqas/techstack-lab/blob/main/notes/spring-bean-life-cycle.md)                                                                     |
 | More coming soon...        | More learning topics will be added gradually.      | —                                                                    |
 
 
