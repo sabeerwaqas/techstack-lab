@@ -24,6 +24,8 @@ Whether it's frontend, backend, DevOps, or full-stack concepts — this lab help
 | Java Strings      | Learn Java Strings        | [📖 View Notes](https://github.com/sabeerwaqas/techstack-lab/blob/main/notes/java-strings.md)           |
 | Java Strings (Continue)      | Learn Java Strings        | [📖 View Notes](https://github.com/sabeerwaqas/techstack-lab/blob/main/notes/java-strings-2.md)           |
 | Spring Bean Life Cycle       | Explore complete bean life cycle     | [📖 View Notes](https://github.com/sabeerwaqas/techstack-lab/blob/main/notes/spring-bean-life-cycle.md)                                                                     |
+| Java Servlet       | Explore internal working of servlet     | [📖 View Notes](https://github.com/sabeerwaqas/techstack-lab/blob/main/notes/java-servlet.md)                                                                     |
+| More coming soon...        | More learning topics will be added gradually.      | —                                                                    |
 | More coming soon...        | More learning topics will be added gradually.      | —                                                                    |
 
 
