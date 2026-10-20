@@ -6,8 +6,34 @@ Credit for the original content belongs to its respective author. The material h
 
 Please refer to the original source for the complete material and context.
 
+---
 
 # Java Servlets — Complete Notes
+
+## Table of Contents
+
+1. [What Is a Servlet?](#1-what-is-a-servlet)
+2. [Why a Normal Java Program Is Not Enough](#2-why-a-normal-java-program-is-not-enough)
+3. [Static Websites vs. Dynamic Websites](#3-static-websites-vs-dynamic-websites)
+4. [What Is Apache Tomcat?](#4-what-is-apache-tomcat)
+5. [What Is a Servlet Container?](#5-what-is-a-servlet-container)
+6. [The Servlet Request–Response Flow](#6-the-servlet-requestresponse-flow)
+7. [Creating and Mapping a Servlet](#7-creating-and-mapping-a-servlet)
+8. [Servlet Lifecycle](#8-servlet-lifecycle)
+9. [When Is a Servlet Created?](#9-when-is-a-servlet-created)
+10. [Query Parameters vs. JSON Request Bodies](#10-query-parameters-vs-json-request-bodies)
+11. [External Tomcat](#11-external-tomcat)
+12. [What Is a WAR File?](#12-what-is-a-war-file)
+13. [Why Is the Servlet API Dependency `provided`?](#13-why-is-the-servlet-api-dependency-provided)
+14. [Running Tomcat on macOS/Linux](#14-running-tomcat-on-macoslinux)
+15. [Running Tomcat on Windows](#15-running-tomcat-on-windows)
+16. [Troubleshooting: Port 8080 Is Already in Use](#16-troubleshooting-port-8080-is-already-in-use)
+17. [Embedded Tomcat in Spring Boot](#17-embedded-tomcat-in-spring-boot)
+18. [Traditional Servlets vs. Spring MVC](#18-traditional-servlets-vs-spring-mvc)
+19. [Servlet vs. Spring MVC Controller](#19-servlet-vs-spring-mvc-controller)
+20. [Complete Mental Model](#20-complete-mental-model)
+
+---
 
 ## 1. What Is a Servlet?
 
@@ -323,18 +349,18 @@ The **Servlet lifecycle** describes the journey of a Servlet object, from initia
 
 ```text
 Servlet Object Creation
-          |
-          v
-        init()
-          |
-          v
-       service()
-          |
-          v
- doGet() / doPost() / ...
-          |
-          v
-       destroy()
+         |
+         v
+       init()
+         |
+         v
+      service()
+         |
+         v
+doGet() / doPost() / ...
+         |
+         v
+      destroy()
 ```
 
 Tomcat manages the Servlet lifecycle.
@@ -363,17 +389,17 @@ Example lifecycle:
 
 ```text
 First request
-      |
-      v
+     |
+     v
 Constructor executes
-      |
-      v
+     |
+     v
 init()
-      |
-      v
+     |
+     v
 service()
-      |
-      v
+     |
+     v
 doGet()
 ```
 
@@ -381,11 +407,11 @@ For a subsequent request to the same Servlet instance:
 
 ```text
 Second request
-      |
-      v
+     |
+     v
 service()
-      |
-      v
+     |
+     v
 doGet()
 ```
 
@@ -401,14 +427,14 @@ Conceptually:
 
 ```text
 service()
-    |
-    +── GET     → doGet()
-    |
-    +── POST    → doPost()
-    |
-    +── PUT     → doPut()
-    |
-    +── DELETE  → doDelete()
+   |
+   +── GET     → doGet()
+   |
+   +── POST    → doPost()
+   |
+   +── PUT     → doPut()
+   |
+   +── DELETE  → doDelete()
 ```
 
 Because `HttpServlet` already implements this dispatching behavior, application developers normally override the relevant `do...()` methods instead of overriding `service()`.
@@ -461,11 +487,11 @@ The usual model is:
 
 ```text
 One Servlet instance
-       |
-       +── Request 1
-       +── Request 2
-       +── Request 3
-       +── Request N
+      |
+      +── Request 1
+      +── Request 2
+      +── Request 3
+      +── Request N
 ```
 
 Tomcat normally reuses the same Servlet instance for multiple requests.
@@ -482,14 +508,14 @@ Under the usual default configuration, Tomcat initializes a Servlet when its fir
 
 ```text
 First request to /hello
-          |
-          v
+         |
+         v
 Create Servlet instance
-          |
-          v
+         |
+         v
 Call init()
-          |
-          v
+         |
+         v
 Handle request
 ```
 
@@ -534,20 +560,20 @@ The process is:
 
 ```text
 Install Tomcat
-      |
-      v
+     |
+     v
 Build the Java Web Application
-      |
-      v
+     |
+     v
 Package as a WAR File
-      |
-      v
+     |
+     v
 Deploy WAR to Tomcat
-      |
-      v
+     |
+     v
 Start Tomcat
-      |
-      v
+     |
+     v
 Application Runs
 ```
 
@@ -872,14 +898,14 @@ The startup flow is:
 
 ```text
 Run main()
-     |
-     v
+    |
+    v
 Spring Boot Starts
-     |
-     v
+    |
+    v
 Embedded Tomcat Starts
-     |
-     v
+    |
+    v
 Application Becomes Available
 ```
 
@@ -931,21 +957,21 @@ The flow becomes:
 
 ```text
 Browser / Postman
-        |
-        v
-      Tomcat
-        |
-        v
- DispatcherServlet
-        |
-        v
-    Controller
-        |
-        v
-      Service
-        |
-        v
-    Response
+       |
+       v
+     Tomcat
+       |
+       v
+DispatcherServlet
+       |
+       v
+   Controller
+       |
+       v
+     Service
+       |
+       v
+   Response
 ```
 
 Example controller:
@@ -1030,29 +1056,29 @@ Remember the responsibilities of each component:
 
 ```text
 Browser sends HTTP request
-          |
-          v
+         |
+         v
 Tomcat receives the request
-          |
-          v
+         |
+         v
 Tomcat identifies the web application
-          |
-          v
+         |
+         v
 Tomcat resolves the matching Servlet
-          |
-          v
+         |
+         v
 Tomcat provides request/response objects
-          |
-          v
+         |
+         v
 Servlet processes the request
-          |
-          v
+         |
+         v
 Servlet prepares the response
-          |
-          v
+         |
+         v
 Tomcat sends the HTTP response
-          |
-          v
+         |
+         v
 Browser receives the response
 ```
 
