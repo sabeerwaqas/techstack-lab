@@ -1,3 +1,11 @@
+## Acknowledgement
+
+These notes are based on and adapted from the original course material available in the [Spring Framework Full Course repository](https://github.com/adityatandon15/Spring-Framework-Full-Course/blob/main/Lecture%2022/notes/Notes.pdf).
+
+Credit for the original content belongs to its respective author. The material has been condensed and reorganized for personal learning, reference, and revision purposes.
+
+Please refer to the original source for the complete material and context.
+
 # Introduction to Spring AOP
 
 ## 1. What Is AOP?
